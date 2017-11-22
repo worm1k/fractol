@@ -1,1 +1,13 @@
-fract_ol.en.pdf
+*.config
+*.creator
+*.files
+*.includes
+a
+fractol
+.obj/
+.DS_Store
+*.a
+*.o
+*.1
+*.xcf
+*.tgz
