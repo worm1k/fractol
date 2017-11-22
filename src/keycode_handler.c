@@ -21,7 +21,7 @@ static void	close_window(t_fdata *data)
 
 int			keycode_handler(int keycode, t_fdata *data)
 {
-    if (keycode == 53)
+    if (keycode == 53) // ESC
         close_window(data);
     return 0;
 }

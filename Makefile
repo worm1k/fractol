@@ -28,7 +28,7 @@ SRC_DIR  = src
 SRC      = $(addprefix $(SRC_DIR)/, $(SRC_NAME))
 
 SRC_NAME =			main.c \
-					window.c \
+					keycode_handler.c \
 
 # add .c file ---->
 
