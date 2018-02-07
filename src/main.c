@@ -117,14 +117,13 @@ int 		main(int argc, char** argv)
 
     data = (t_fdata *)malloc(sizeof(t_fdata));
 
-    if (argc == 2) // fix it
+    if (argc != 2)
     {
         ft_putendl("usage: ./fractol [1|2|3]");
         ft_putendl("1: MBrot");
         ft_putendl("2: Julia");
-        ft_putendl("3: random");
     }
-
+    int option = ft_atoi(argv[1]);
     data->moveX = 0;
     data->moveY = 0;
     data->zoom = 1;
@@ -134,8 +133,18 @@ int 		main(int argc, char** argv)
     data->win = mlx_new_window(data->mlx, data->win_x, data->win_y, "fractol");
     data->img = mlx_new_image(data->mlx, data->win_x, data->win_y);
     data->str = mlx_get_data_addr(data->img, &data->b, &data->size, &data->end);
-    int i = -5;
-    Julia(data);
+
+    if (option == MBROT)
+        MBrot(data);
+    else if (option == JULIA)
+        Julia(data);
+    else
+    {        
+        ft_putendl("usage: ./fractol [1|2|3]");
+        ft_putendl("1: MBrot");
+        ft_putendl("2: Julia");
+        exit(0);
+    }
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
     mlx_hook(data->win, 2, 5, keycode_handler, data);
     mlx_loop(data->mlx);

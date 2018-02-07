@@ -16,6 +16,12 @@
 # include "libft.h"
 # include "math.h"
 # include <stdio.h> // delet dis
+#include <time.h>// delet dis
+#include <stdlib.h>// delet dis
+#include <math.h>
+# define MBROT 1
+# define JULIA 2
+# define OTHER 3
 
 typedef struct		s_fdata
 {
@@ -41,9 +47,9 @@ typedef struct		s_comp
 
 typedef struct 		s_rgb
 {
-	double r;		// a fraction between 0 and 1
-	double g;		// a fraction between 0 and 1
-	double b;		// a fraction between 0 and 1
+	double r;
+	double g;
+	double b;
 } 					t_rgb;
 
 typedef struct		s_hsv{
@@ -52,6 +58,7 @@ typedef struct		s_hsv{
 	double v;       // a fraction between 0 and 1
 }					t_hsv;
 
+void			close_window(t_fdata *data);
 t_rgb   		hsv2rgb(t_hsv in);
 int				keycode_handler(int keycode, t_fdata *data);
 void        	MBrot(t_fdata *data);
