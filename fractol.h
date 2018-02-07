@@ -15,11 +15,12 @@
 # include "mlx.h"
 # include "libft.h"
 # include "math.h"
+# include <stdio.h> // delet dis
 
 typedef struct		s_fdata
 {
 	void			*mlx;
-    void			*win;
+	void			*win;
 	int				win_x;
 	int				win_y;
 	void			*img;
@@ -27,27 +28,33 @@ typedef struct		s_fdata
 	int				b;
 	int				size;
 	int				end;
+	double			moveX;
+	double			moveY;
+	double			zoom;
 }					t_fdata;
 
-typedef struct      s_comp
+typedef struct		s_comp
 {
-    int             x;
-    int             y;
+	int				x;
+	int				y;
 }                   t_comp;
 
-typedef struct {
-    double r;       // a fraction between 0 and 1
-    double g;       // a fraction between 0 and 1
-    double b;       // a fraction between 0 and 1
-} rgb;
+typedef struct 		s_rgb
+{
+	double r;		// a fraction between 0 and 1
+	double g;		// a fraction between 0 and 1
+	double b;		// a fraction between 0 and 1
+} 					t_rgb;
 
-typedef struct {
-    double h;       // angle in degrees
-    double s;       // a fraction between 0 and 1
-    double v;       // a fraction between 0 and 1
-} hsv;
+typedef struct		s_hsv{
+	double h;       // angle in degrees
+	double s;       // a fraction between 0 and 1
+	double v;       // a fraction between 0 and 1
+}					t_hsv;
 
-rgb   		hsv2rgb(hsv in);
-int			keycode_handler(int keycode, t_fdata *data);
+t_rgb   		hsv2rgb(t_hsv in);
+int				keycode_handler(int keycode, t_fdata *data);
+void        	MBrot(t_fdata *data);
+void			Julia(t_fdata *data);
 
 #endif
