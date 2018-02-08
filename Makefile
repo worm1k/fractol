@@ -28,8 +28,10 @@ SRC_DIR  = src
 SRC      = $(addprefix $(SRC_DIR)/, $(SRC_NAME))
 
 SRC_NAME =			hsv_to_rgb.c \
+					julia.c \
 					keycode_handler.c \
 					main.c \
+					mouse_handler.c \
 
 # add .c file ---->
 

@@ -17,11 +17,14 @@ void			redraw(t_fdata *data)
 	mlx_destroy_image(data->mlx, data->img);
 	data->img = mlx_new_image(data->mlx, data->win_x, data->win_y);
 	data->str = mlx_get_data_addr(data->img, &data->b, &data->size, &data->end);
-	Julia(data);
+	if (data->fractal == JULIA)
+		Julia(data);
+	else if (data->fractal == MBROT)
+		MBrot(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 
-static void	close_window(t_fdata *data)
+void	close_window(t_fdata *data)
 {
     mlx_destroy_image(data->mlx, data->img);
     mlx_destroy_window(data->mlx, data->win);
