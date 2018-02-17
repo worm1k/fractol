@@ -27,7 +27,8 @@ OBJ      = $(subst .c,.o,$(subst $(SRC_DIR)/,$(OBJ_DIR)/,$(SRC)))
 SRC_DIR  = src
 SRC      = $(addprefix $(SRC_DIR)/, $(SRC_NAME))
 
-SRC_NAME =			hsv_to_rgb.c \
+SRC_NAME =			burning_ship.c \
+					hsv_to_rgb.c \
 					julia.c \
 					keycode_handler.c \
 					main.c \
@@ -42,10 +43,10 @@ SRC_NAME =			hsv_to_rgb.c \
 
 .PHONY: all clean fclean re
 
-all: $(LIB) $(MLX) $(NAME)
+all: $(LIB) $(NAME) #$(MLX)
 
 $(NAME): $(OBJ) $(INC)
-		$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) -lm -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) -lm -framework OpenGL -framework AppKit -o $(NAME) -lmlx #$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) -lm -framework OpenGL -framework AppKit -o $(NAME)
 		@echo "\033[33m'$(NAME)' compiling done.\033[0m"
 
 $(LIB):

@@ -21,6 +21,8 @@ void			redraw(t_fdata *data)
 		Julia(data);
 	else if (data->fractal == MBROT)
 		MBrot(data);
+    else if (data->fractal == OTHER)
+        burning_ship(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 }
 

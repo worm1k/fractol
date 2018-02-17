@@ -107,6 +107,11 @@ int 		main(int argc, char** argv)
         data->fractal = JULIA;
         Julia(data);
     }
+    else if (option == OTHER)
+    {
+        data->fractal = OTHER;
+        burning_ship(data);
+    }
     else
     {        
         ft_putendl("usage: ./fractol [1|2|3]");

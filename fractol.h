@@ -66,5 +66,6 @@ int				keycode_handler(int keycode, t_fdata *data);
 void        	MBrot(t_fdata *data);
 void			Julia(t_fdata *data);
 int	 			mouse_handler(int x, int y, t_fdata *data);
+void            burning_ship(t_fdata* data);
 
 #endif
