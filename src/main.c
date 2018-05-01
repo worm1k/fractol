@@ -33,6 +33,11 @@ int			ft_exit(t_fdata* data)
 	return 0;
 }
 
+// todo:
+// julia transform with mouse
+// keys to change iterations
+// keys to change colors
+// norme
 int 		main(int argc, char** argv)
 {
 	t_fdata	*data;
