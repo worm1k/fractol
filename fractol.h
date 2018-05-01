@@ -44,9 +44,9 @@ typedef struct		s_comp
 {
 	int				x;
 	int				y;
-}                   t_comp;
+}					t_comp;
 
-typedef struct 		s_rgb
+typedef struct		s_rgb
 {
 	double r;
 	double g;
@@ -54,18 +54,18 @@ typedef struct 		s_rgb
 } 					t_rgb;
 
 typedef struct		s_hsv{
-	double h;       // angle in degrees
-	double s;       // a fraction between 0 and 1
-	double v;       // a fraction between 0 and 1
+	double h;		// angle in degrees
+	double s;		// a fraction between 0 and 1
+	double v;		// a fraction between 0 and 1
 }					t_hsv;
 
 void			close_window(t_fdata *data);
-t_rgb   		hsv2rgb(t_hsv in);
+t_rgb			hsv2rgb(t_hsv in);
 void			img_pixel_put(t_fdata *data, int x, int y, t_rgb color);
 int				keycode_handler(int keycode, t_fdata *data);
-void        	MBrot(t_fdata *data);
+void			MBrot(t_fdata *data);
 void			Julia(t_fdata *data);
-int	 			mouse_handler(int x, int y, t_fdata *data);
-void            burning_ship(t_fdata* data);
+int				mouse_handler(int x, int y, t_fdata *data);
+void			burning_ship(t_fdata* data);
 
 #endif

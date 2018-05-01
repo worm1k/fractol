@@ -32,10 +32,10 @@ SRC_NAME =			burning_ship.c \
 					julia.c \
 					keycode_handler.c \
 					main.c \
+					mbrot.c \
 					mouse_handler.c \
 
 # add .c file ---->
-
 
 ################################################################################
 #	RULES

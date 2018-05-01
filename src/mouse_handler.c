@@ -12,10 +12,17 @@
 
 #include "fractol.h"
 
-int mouse_handler(int x, int y, t_fdata *data)
+static int	mouse_key_handler(int key, int x, int y, t_fdata *data)
 {
-	if (data->fractal == MBROT || x < 0 || data->win_x <= x || y < 0 || data->win_y <= y)
+	printf("KEY:%d X:%d Y:[%d]\n", key, x, y);
+}
+
+int 		mouse_handler(int x, int y, t_fdata *data)
+{
+	if (x < 0 || data->win_x <= x || y < 0 || data->win_y <= y)
 		return 0;
 	printf("X:%d Y:[%d]\n", x, y);
+	mlx_mouse_hook(data->win, mouse_key_handler, data);
 	return 0;
 }
+
