@@ -59,13 +59,13 @@ static void	down(t_fdata *data)
 
 static void	zoomin(t_fdata *data)
 {
-	data->zoom += 0.05;
+	data->zoom *= 1.1;
 	redraw(data);
 }
 
 static void	zoomout(t_fdata *data)
 {
-	data->zoom -= 0.05;
+	data->zoom /= 1.1;
 	redraw(data);
 }
 

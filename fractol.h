@@ -37,6 +37,8 @@ typedef struct		s_fdata
 	double			moveX;
 	double			moveY;
 	double			zoom;
+	double			zoomX;
+	double			zoomY;
 	int				fractal;
 }					t_fdata;
 
@@ -60,11 +62,13 @@ typedef struct		s_hsv{
 }					t_hsv;
 
 void			close_window(t_fdata *data);
+void			redraw(t_fdata *data);
 t_rgb			hsv2rgb(t_hsv in);
 void			img_pixel_put(t_fdata *data, int x, int y, t_rgb color);
 int				keycode_handler(int keycode, t_fdata *data);
 void			MBrot(t_fdata *data);
 void			Julia(t_fdata *data);
+int				mouse_wheel_handler(int key, int x, int y, t_fdata *data);
 int				mouse_handler(int x, int y, t_fdata *data);
 void			burning_ship(t_fdata* data);
 

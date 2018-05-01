@@ -51,6 +51,8 @@ int 		main(int argc, char** argv)
 	data->moveX = 0;
 	data->moveY = 0;
 	data->zoom = 1;
+	data->zoomX = 400;
+	data->zoomY = 320;
 	data->win_x = 800;
 	data->win_y = 640;
 	data->mlx = mlx_init();
@@ -79,11 +81,12 @@ int 		main(int argc, char** argv)
 		ft_putendl("1: MBrot");
 		ft_putendl("2: Julia");
 		ft_putendl("3: Burning Ship");
-		exit(0);
+		ft_exit(data);
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_hook(data->win, 2, 5, keycode_handler, data);
 	mlx_hook(data->win, 6, 5, mouse_handler, data);
+	mlx_mouse_hook(data->win, mouse_wheel_handler, data);
 	mlx_hook(data->win, 17, 1L << 17, ft_exit, data);
 	mlx_loop(data->mlx);
 	return (0);
