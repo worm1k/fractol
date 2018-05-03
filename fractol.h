@@ -40,6 +40,15 @@ typedef struct		s_fdata
 	double			zoomX;
 	double			zoomY;
 	int				fractal;
+
+    double          cRe;
+    double          cIm;
+    int             maxIterations;
+    int             need_transform;
+
+    char            dr;
+    char            dg;
+    char            db;
 }					t_fdata;
 
 typedef struct		s_comp
@@ -61,15 +70,21 @@ typedef struct		s_hsv{
 	double v;		// a fraction between 0 and 1
 }					t_hsv;
 
-void			close_window(t_fdata *data);
+int    			close_window(t_fdata *data);
 void			redraw(t_fdata *data);
+void            reset(t_fdata *data);
 t_rgb			hsv2rgb(t_hsv in);
 void			img_pixel_put(t_fdata *data, int x, int y, t_rgb color);
-int				keycode_handler(int keycode, t_fdata *data);
-void			MBrot(t_fdata *data);
-void			Julia(t_fdata *data);
+int				keycode_handler_1(int keycode, t_fdata *data);
+int				keycode_handler_2(int keycode, t_fdata *data);
+int				keycode_handler_3(int keycode, t_fdata *data);
+void			mbrot(t_fdata *data);
+void			julia(t_fdata *data);
+void			burning_ship(t_fdata* data);
+void			init_mbrot(t_fdata *data);
+void            init_julia(t_fdata *data);
+void			init_burning_ship(t_fdata* data);
 int				mouse_wheel_handler(int key, int x, int y, t_fdata *data);
 int				mouse_handler(int x, int y, t_fdata *data);
-void			burning_ship(t_fdata* data);
 
 #endif

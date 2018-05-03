@@ -19,39 +19,44 @@ double			ft_abss(double x)
 	return x;
 }
 
+void			init_burning_ship(t_fdata* data)
+{
+    data->fractal = OTHER;
+    data->moveX = -0.5;
+    data->moveY = -0.3;
+    data->zoom = 1;
+    data->zoomX = 400;
+    data->zoomY = 320;
+    data->maxIterations = 300;
+}
+
 void			burning_ship(t_fdata* data)
 {
 	t_hsv		hsvcolor;
-	t_rgb		rgbcolor; //the RGB color value for the pixel
+    t_rgb		rgbcolor;
 
 	for (int xx = 0; xx < data->win_x; xx++)
 	{
 		for (int yy = 0; yy < data->win_y; yy++)
 		{
-			// double x = scaled x coordinate of pixel (scaled to lie in the Mandelbrot X scale (-2.5, 1))
-			// double y = scaled y coordinate of pixel (scaled to lie in the Mandelbrot Y scale (-1, 1))
-			// a->real = 1.5 * (x - a->win_x / 2) / (0.5 * a->zoom * a->win_x) + a->move_x_axis;
-			// a->imaginary = (y - a->win_y / 2) / (0.5 * a->zoom * a->win_y) + a->move_y_axis;
-
 			double x  = 1.5 * (xx - data->win_x / 2) / (0.5 * data->zoom * data->win_x) + data->moveX;
 			double y = (yy - data->win_y / 2) / (0.5 * data->zoom * data->win_y) + data->moveY;
 			
-			double zx = x; // zx represents the real part of z
-			double zy = y; // zy represents the imaginary part of z 
+            double zx = x;
+            double zy = y;
 
-			int iteration = 0;
-			int max_iteration = 1000;
+            int iteration = 0;
 		  
-			while (zx * zx + zy * zy < 4  &&  iteration < max_iteration) 
+            while (zx * zx + zy * zy < 4  &&  iteration < data->maxIterations)
 			{
 				double xtemp = zx * zx - zy * zy + x;
-				zy = ft_abss(2 * zx * zy + y); //ft_abss returns the ft_abssolute value
+                zy = ft_abss(2 * zx * zy + y);
 				zx = ft_abss(xtemp);
 
 				iteration = iteration + 1;
 			}
 
-			if (iteration == max_iteration) //Belongs to the set
+            if (iteration == data->maxIterations)
 			{
 				rgbcolor.r = 0;
 				rgbcolor.g = 0;
@@ -62,9 +67,8 @@ void			burning_ship(t_fdata* data)
 
 			hsvcolor.h = iteration % 256;
 			hsvcolor.s = iteration % 255;
-			hsvcolor.v = iteration % 255 * (iteration < max_iteration);
-			rgbcolor = hsv2rgb(hsvcolor);
-			//draw the pixel
+            hsvcolor.v = iteration % 255 * (iteration < data->maxIterations);
+            rgbcolor = hsv2rgb(hsvcolor);
 			img_pixel_put(data, xx, yy, rgbcolor);
 		}
 	}

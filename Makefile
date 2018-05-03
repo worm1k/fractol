@@ -27,12 +27,15 @@ OBJ      = $(subst .c,.o,$(subst $(SRC_DIR)/,$(OBJ_DIR)/,$(SRC)))
 SRC_DIR  = src
 SRC      = $(addprefix $(SRC_DIR)/, $(SRC_NAME))
 
-SRC_NAME =			burning_ship.c \
+SRC_NAME =			draw.c \
+					fractol_burning_ship.c \
+					fractol_julia.c \
+					fractol_mbrot.c \
 					hsv_to_rgb.c \
-					julia.c \
-					keycode_handler.c \
+					keycode_handler_1.c \
+					keycode_handler_2.c \
+					keycode_handler_3.c \
 					main.c \
-					mbrot.c \
 					mouse_handler.c \
 
 # add .c file ---->
@@ -43,10 +46,10 @@ SRC_NAME =			burning_ship.c \
 
 .PHONY: all clean fclean re
 
-all: $(LIB) $(NAME) #$(MLX)
+all: $(LIB) $(MLX) $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-		$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) -lm -framework OpenGL -framework AppKit -o $(NAME) -lmlx #$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) -lm -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) -lm -framework OpenGL -framework AppKit -o $(NAME) $(MLX_DIR)/$(MLX)  #$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) -lm -framework OpenGL -framework AppKit -o $(NAME)
 		@echo "\033[33m'$(NAME)' compiling done.\033[0m"
 
 $(LIB):

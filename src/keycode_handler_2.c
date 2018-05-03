@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   keycode_handler_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,27 +11,6 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void			redraw(t_fdata *data)
-{
-	mlx_destroy_image(data->mlx, data->img);
-	data->img = mlx_new_image(data->mlx, data->win_x, data->win_y);
-	data->str = mlx_get_data_addr(data->img, &data->b, &data->size, &data->end);
-	if (data->fractal == JULIA)
-		Julia(data);
-	else if (data->fractal == MBROT)
-		MBrot(data);
-	else if (data->fractal == OTHER)
-		burning_ship(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-}
-
-void	close_window(t_fdata *data)
-{
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_window(data->mlx, data->win);
-	exit(0);
-}
 
 static void	left(t_fdata *data)
 {
@@ -57,34 +36,17 @@ static void	down(t_fdata *data)
 	redraw(data);
 }
 
-static void	zoomin(t_fdata *data)
+int			keycode_handler_2(int keycode, t_fdata *data)
 {
-	data->zoom *= 1.1;
-	redraw(data);
-}
-
-static void	zoomout(t_fdata *data)
-{
-	data->zoom /= 1.1;
-	redraw(data);
-}
-
-int			keycode_handler(int keycode, t_fdata *data)
-{
-	printf("%d\n", keycode);
-	if (keycode == 53) // ESC
-		close_window(data);
-	if (keycode == 123) // LEFT
+    if (keycode == 123)
 		left(data);
-	if (keycode == 124) // DOWN
+    else if (keycode == 124)
 		right(data);
-	if (keycode == 125) // RIGHT
+    else if (keycode == 125)
 		down(data);
-	if (keycode == 126) // UP
-		up(data);
-	if (keycode == 6) // z
-		zoomin(data);
-	if (keycode == 7) // x
-		zoomout(data);
+    else if (keycode == 126)
+        up(data);
+    else
+        keycode_handler_3(keycode, data);
 	return 0;
 }
