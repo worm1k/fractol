@@ -45,10 +45,6 @@ typedef struct		s_fdata
     double          cIm;
     int             maxIterations;
     int             need_transform;
-
-    char            dr;
-    char            dg;
-    char            db;
 }					t_fdata;
 
 typedef struct		s_comp

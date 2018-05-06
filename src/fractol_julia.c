@@ -26,42 +26,44 @@ void            init_julia(t_fdata *data)
     data->need_transform = 1;
 }
 
+static void     norme_helper_func(t_fdata* data, double* dvar, int* ivar)
+{
+    ivar[2] = 0;
+    while (ivar[2] < data->maxIterations)
+    {
+        dvar[2] = dvar[0];
+        dvar[3] = dvar[1];
+        dvar[0] = dvar[2] * dvar[2] - dvar[3] * dvar[3] + data->cRe;
+        dvar[1] = 2 * dvar[2] * dvar[3] + data->cIm;
+        if((dvar[0] * dvar[0] + dvar[1] * dvar[1]) > 4)
+            return ;
+        ivar[2]++;
+    }
+}
+
 void			julia(t_fdata *data)
 {
-	//each iteration, it calculates: new = old*old + c, where c is a constant and old starts at current pixel
-	double newRe, newIm, oldRe, oldIm;   //real and imaginary parts of new and old
-	t_hsv hsvcolor;
-    t_rgb rgbcolor; //the RGB color value for the pixel
+    double      dvar[4];
+    int         ivar[3];
+    t_hsv       hsvcolor;
+    t_rgb       rgbcolor;
 
-	for(int y = 0; y < data->win_y; y += 1)
+    ivar[0] = 0;
+    while (ivar[0] < data->win_y)
 	{
-		for(int x = 0; x < data->win_x; x += 1)
+        ivar[1] = 0;
+        while (ivar[1] < data->win_x)
 		{
-			//calculate the initial real and imaginary part of z, based on the pixel location and zoom and position values
-			newRe = 1.5 * (x - data->win_x / 2) / (0.5 * data->zoom * data->win_x) + data->moveX;
-			newIm = (y - data->win_y / 2) / (0.5 * data->zoom * data->win_y) + data->moveY;
-			//i will represent the number of iterations
-			int i;
-			//start the iteration process
-            for(i = 0; i < data->maxIterations; i++)
-			{
-				//remember value of previous iteration
-				oldRe = newRe;
-				oldIm = newIm;
-				//the actual iteration, the real and imaginary part are calculated
-                newRe = oldRe * oldRe - oldIm * oldIm + data->cRe;
-                newIm = 2 * oldRe * oldIm + data->cIm;
-				//if the point is outside the circle with radius 2: stop
-				if((newRe * newRe + newIm * newIm) > 4) 
-					break;
-			}
-			//use color model conversion to get rainbow palette, make brightness black if maxIterations reached
-			hsvcolor.h = i % 256;
-			hsvcolor.s = i % 256;
-            hsvcolor.v = i % 256 * (i < data->maxIterations);
-			rgbcolor = hsv2rgb(hsvcolor);
-			//draw the pixel
-			img_pixel_put(data, x, y, rgbcolor);
+            dvar[0] = 1.5 * (ivar[1] - data->win_x / 2) / (0.5 * data->zoom * data->win_x) + data->moveX;
+            dvar[1] = (ivar[0] - data->win_y / 2) / (0.5 * data->zoom * data->win_y) + data->moveY;
+            norme_helper_func(data, dvar, ivar);
+            hsvcolor.h = ivar[2] % 256;
+            hsvcolor.s = ivar[2] % 256;
+            hsvcolor.v = ivar[2] % 256 * (ivar[2] < data->maxIterations);
+            rgbcolor = hsv2rgb(hsvcolor);
+            img_pixel_put(data, ivar[1], ivar[0], rgbcolor);
+            ivar[1]++;
 		}
+        ivar[0]++;
 	}
 }

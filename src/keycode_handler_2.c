@@ -46,7 +46,5 @@ int			keycode_handler_2(int keycode, t_fdata *data)
 		down(data);
     else if (keycode == 126)
         up(data);
-    else
-        keycode_handler_3(keycode, data);
 	return 0;
 }

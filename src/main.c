@@ -25,7 +25,6 @@ static void        init_all(t_fdata* data, int option)
 {
     if (option < 1 || 3 < option)
         return print_usage();
-
     data->win_x = 800;
     data->win_y = 640;
     data->mlx = mlx_init();
@@ -53,7 +52,6 @@ int 		main(int argc, char** argv)
 {
     t_fdata	data;
 
-    data.dr = data.dg = data.db = 0;
 	if (argc != 2)
         print_usage();
 	int option = ft_atoi(argv[1]);

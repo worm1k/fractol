@@ -34,7 +34,6 @@ SRC_NAME =			draw.c \
 					hsv_to_rgb.c \
 					keycode_handler_1.c \
 					keycode_handler_2.c \
-					keycode_handler_3.c \
 					main.c \
 					mouse_handler.c \
 
