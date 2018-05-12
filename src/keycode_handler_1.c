@@ -26,8 +26,12 @@ static void	zoomout(t_fdata *data)
 
 static void	iterplus(t_fdata *data)
 {
-	if (data->max_iterations < 291)
+	if (data->max_iterations < 10)
+		data->max_iterations += 1;
+	else if (data->max_iterations < 291)
 		data->max_iterations += 10;
+	else
+		return ;
 	redraw(data);
 }
 
