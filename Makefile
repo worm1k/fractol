@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 CC       = gcc
-#CFLAGS   = -Wall -Wextra -Werror
+CFLAGS   = -Wall -Wextra -Werror
 LIB_DIR  = ext/libft
 LIB      = libft.a
 MLX_DIR  = ./ext/minilibx_macos
@@ -48,7 +48,7 @@ SRC_NAME =			draw.c \
 all: $(LIB) $(MLX) $(NAME)
 
 $(NAME): $(OBJ) $(INC)
-		$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) -lm -framework OpenGL -framework AppKit -o $(NAME) $(MLX_DIR)/$(MLX)  #$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) -lm -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJ) $(LIB_DIR)/$(LIB) -lm -framework OpenGL -framework AppKit -o $(NAME) $(MLX_DIR)/$(MLX)
 		@echo "\033[33m'$(NAME)' compiling done.\033[0m"
 
 $(LIB):

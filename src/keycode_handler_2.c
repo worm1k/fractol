@@ -14,37 +14,37 @@
 
 static void	left(t_fdata *data)
 {
-	data->moveX += 0.05;
+	data->mov_x += 0.05;
 	redraw(data);
 }
 
 static void	right(t_fdata *data)
 {
-	data->moveX -= 0.05;
+	data->mov_x -= 0.05;
 	redraw(data);
 }
 
 static void	up(t_fdata *data)
 {
-	data->moveY += 0.05;
+	data->mov_y += 0.05;
 	redraw(data);
 }
 
 static void	down(t_fdata *data)
 {
-	data->moveY -= 0.05;
+	data->mov_y -= 0.05;
 	redraw(data);
 }
 
 int			keycode_handler_2(int keycode, t_fdata *data)
 {
-    if (keycode == 123)
+	if (keycode == 123)
 		left(data);
-    else if (keycode == 124)
+	else if (keycode == 124)
 		right(data);
-    else if (keycode == 125)
+	else if (keycode == 125)
 		down(data);
-    else if (keycode == 126)
-        up(data);
-	return 0;
+	else if (keycode == 126)
+		up(data);
+	return (0);
 }
